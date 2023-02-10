@@ -18,6 +18,7 @@ def cifar_pipeline():
     upload_dataset = dsl.ContainerOp(
         name='upload_dataset',
         image='oawofolu/ml-image-processor',
+        command="python",
         arguments=[
             "/app/main.py",
             "--mlflow_entry", 'upload_dataset',
@@ -32,6 +33,7 @@ def cifar_pipeline():
     train_model = dsl.ContainerOp(
         name='train_model',
         image='oawofolu/ml-image-processor',
+        command="python",
         arguments=[
             "/app/main.py",
             "--mlflow_entry", 'train_model',
@@ -47,6 +49,7 @@ def cifar_pipeline():
     evaluate_model = dsl.ContainerOp(
         name='evaluate_model',
         image='oawofolu/ml-image-processor',
+        command="python",
         arguments=[
             "/app/main.py",
             "--mlflow_entry", 'evaluate_model',
@@ -62,6 +65,7 @@ def cifar_pipeline():
     promote_model_to_staging = dsl.ContainerOp(
         name='promote_model_to_staging',
         image='oawofolu/ml-image-processor',
+        command="python",
         arguments=[
             "/app/main.py",
             "--mlflow_entry", 'promote_model_to_staging',
