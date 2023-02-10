@@ -2,7 +2,7 @@ import kfp.dsl as dsl
 from kfp import Client
 import logging
 import warnings
-from app import utils
+import utils
 
 logging.basicConfig()
 logging.getLogger().setLevel(logging.INFO)
@@ -79,7 +79,7 @@ def cifar_pipeline():
 
 
 if __name__ == '__main__':
-    logging.info("Compiling Kubeflow pipeline...")
+    logging.info(f"Compiling Kubeflow pipeline...host={utils.get_env_var('KUBEFLOW_PIPELINES_HOST')}/pipelines")
     import kfp.compiler as compiler
     compiler.Compiler().compile(cifar_pipeline, __file__ + '.zip')
 
