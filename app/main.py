@@ -21,11 +21,11 @@ def cifar_pipeline():
         command="python",
         arguments=[
             "/app/main.py",
-            "--mlflow_entry", 'upload_dataset',
-            "--mlflow_stage", utils.get_env_var('MLFLOW_STAGE'),
-            "--git_repo", utils.get_env_var('GIT_REPO'),
-            "--experiment_name", utils.get_env_var('EXPERIMENT_NAME'),
-            "--environment_name", utils.get_env_var('ENVIRONMENT_NAME')
+            "mlflow_entry='upload_dataset'",
+            f"mlflow_stage={utils.get_env_var('MLFLOW_STAGE')}",
+            f"git_repo={utils.get_env_var('GIT_REPO')}",
+            f"experiment_name={utils.get_env_var('EXPERIMENT_NAME')}",
+            f"environment_name={utils.get_env_var('ENVIRONMENT_NAME')}"
         ]
     )
 
@@ -36,11 +36,11 @@ def cifar_pipeline():
         command="python",
         arguments=[
             "/app/main.py",
-            "--mlflow_entry", 'train_model',
-            "--mlflow_stage", utils.get_env_var('MLFLOW_STAGE'),
-            "--git_repo", utils.get_env_var('GIT_REPO'),
-            "--experiment_name", utils.get_env_var('EXPERIMENT_NAME'),
-            "--environment_name", utils.get_env_var('ENVIRONMENT_NAME')
+            "mlflow_entry='train_model'",
+            f"mlflow_stage={utils.get_env_var('MLFLOW_STAGE')}",
+            f"git_repo={utils.get_env_var('GIT_REPO')}",
+            f"experiment_name={utils.get_env_var('EXPERIMENT_NAME')}",
+            f"environment_name={utils.get_env_var('ENVIRONMENT_NAME')}"
         ]
     )
     train_model.after(upload_dataset)
@@ -52,11 +52,11 @@ def cifar_pipeline():
         command="python",
         arguments=[
             "/app/main.py",
-            "--mlflow_entry", 'evaluate_model',
-            "--mlflow_stage", utils.get_env_var('MLFLOW_STAGE'),
-            "--git_repo", utils.get_env_var('GIT_REPO'),
-            "--experiment_name", utils.get_env_var('EXPERIMENT_NAME'),
-            "--environment_name", utils.get_env_var('ENVIRONMENT_NAME')
+            "mlflow_entry='evaluate_model'",
+            f"mlflow_stage={utils.get_env_var('MLFLOW_STAGE')}",
+            f"git_repo={utils.get_env_var('GIT_REPO')}",
+            f"experiment_name={utils.get_env_var('EXPERIMENT_NAME')}",
+            f"environment_name={utils.get_env_var('ENVIRONMENT_NAME')}"
         ]
     )
     evaluate_model.after(train_model)
@@ -68,11 +68,11 @@ def cifar_pipeline():
         command="python",
         arguments=[
             "/app/main.py",
-            "--mlflow_entry", 'promote_model_to_staging',
-            "--mlflow_stage", utils.get_env_var('MLFLOW_STAGE'),
-            "--git_repo", utils.get_env_var('GIT_REPO'),
-            "--experiment_name", utils.get_env_var('EXPERIMENT_NAME'),
-            "--environment_name", utils.get_env_var('ENVIRONMENT_NAME')
+            "mlflow_entry='promote_model_to_staging'",
+            f"mlflow_stage={utils.get_env_var('MLFLOW_STAGE')}",
+            f"git_repo={utils.get_env_var('GIT_REPO')}",
+            f"experiment_name={utils.get_env_var('EXPERIMENT_NAME')}",
+            f"environment_name={utils.get_env_var('ENVIRONMENT_NAME')}"
         ]
     )
     promote_model_to_staging.after(evaluate_model)
