@@ -27,7 +27,7 @@ def get_env_var(name):
         logging.info('Unknown environment variable requested: {}'.format(name))
 
 
-def get_latest_docker_image_with_sha(image):
+def get_latest_container_image_with_sha(image):
     client = docker.from_env()
     registry_data = client.images.get_registry_data(image)
     logging.info(f"Short Id = {registry_data.short_id}")
