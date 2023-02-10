@@ -79,12 +79,12 @@ def cifar_pipeline():
 
 
 if __name__ == '__main__':
-    logging.info(f"Compiling Kubeflow pipeline...host={utils.get_env_var('KUBEFLOW_PIPELINES_HOST')}/pipelines")
+    logging.info(f"Compiling Kubeflow pipeline...host={utils.get_env_var('KUBEFLOW_PIPELINES_HOST')}")
     import kfp.compiler as compiler
     compiler.Compiler().compile(cifar_pipeline, __file__ + '.zip')
 
     logging.info("Generating new experiment run...")
-    client = Client(host=f'{utils.get_env_var("KUBEFLOW_PIPELINES_HOST")}/pipelines')
+    client = Client(host=f'{utils.get_env_var("KUBEFLOW_PIPELINES_HOST")}')
     cifar_experiment = client.create_experiment(name=utils.get_env_var('EXPERIMENT_NAME'))
     cifar_run = client.run_pipeline(cifar_experiment.id, 'cifar-pipeline', __file__ + '.zip')
     logging.info("Run completed.")
