@@ -3,7 +3,6 @@ from collections import defaultdict
 import sys
 import os
 import re
-import docker
 
 
 def get_cmd_arg(name):
@@ -25,10 +24,3 @@ def get_env_var(name):
         return int(value) if re.match("\d+$", value) else value
     else:
         logging.info('Unknown environment variable requested: {}'.format(name))
-
-
-def get_latest_container_image_with_sha(image):
-    client = docker.from_env()
-    registry_data = client.images.get_registry_data(image)
-    logging.info(f"Short Id = {registry_data.short_id}")
-    return registry_data.short_id or image
