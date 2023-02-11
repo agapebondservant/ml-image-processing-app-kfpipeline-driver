@@ -79,7 +79,7 @@ def cifar_pipeline():
             f"experiment_name={utils.get_env_var('EXPERIMENT_NAME')}",
             f"environment_name={utils.get_env_var('ENVIRONMENT_NAME')}",
             f"default_token={datetime.datetime.now()}"
-        ] 
+        ]
     )
     promote_model_to_staging.after(evaluate_model)
 
