@@ -16,8 +16,6 @@ warnings.filterwarnings('ignore')
 )
 def cifar_pipeline():
 
-    default_args = [f"default_token={datetime.datetime.now()}"] if utils.get_env_var('USE_CACHE') == 'nocache' else []
-
     # Upload Dataset
     upload_dataset = dsl.ContainerOp(
         name='upload_dataset',
@@ -29,8 +27,9 @@ def cifar_pipeline():
             f"mlflow_stage={utils.get_env_var('MLFLOW_STAGE')}",
             f"git_repo={utils.get_env_var('GIT_REPO')}",
             f"experiment_name={utils.get_env_var('EXPERIMENT_NAME')}",
-            f"environment_name={utils.get_env_var('ENVIRONMENT_NAME')}"
-        ] + default_args
+            f"environment_name={utils.get_env_var('ENVIRONMENT_NAME')}",
+            f"default_token={datetime.datetime.now()}"
+        ]
     )
 
     # Train Model
@@ -44,8 +43,9 @@ def cifar_pipeline():
             f"mlflow_stage={utils.get_env_var('MLFLOW_STAGE')}",
             f"git_repo={utils.get_env_var('GIT_REPO')}",
             f"experiment_name={utils.get_env_var('EXPERIMENT_NAME')}",
-            f"environment_name={utils.get_env_var('ENVIRONMENT_NAME')}"
-        ] + default_args
+            f"environment_name={utils.get_env_var('ENVIRONMENT_NAME')}",
+            f"default_token={datetime.datetime.now()}"
+        ]
     )
     train_model.after(upload_dataset)
 
@@ -60,8 +60,9 @@ def cifar_pipeline():
             f"mlflow_stage={utils.get_env_var('MLFLOW_STAGE')}",
             f"git_repo={utils.get_env_var('GIT_REPO')}",
             f"experiment_name={utils.get_env_var('EXPERIMENT_NAME')}",
-            f"environment_name={utils.get_env_var('ENVIRONMENT_NAME')}"
-        ] + default_args
+            f"environment_name={utils.get_env_var('ENVIRONMENT_NAME')}",
+            f"default_token={datetime.datetime.now()}"
+        ]
     )
     evaluate_model.after(train_model)
 
@@ -76,8 +77,9 @@ def cifar_pipeline():
             f"mlflow_stage={utils.get_env_var('MLFLOW_STAGE')}",
             f"git_repo={utils.get_env_var('GIT_REPO')}",
             f"experiment_name={utils.get_env_var('EXPERIMENT_NAME')}",
-            f"environment_name={utils.get_env_var('ENVIRONMENT_NAME')}"
-        ] + default_args
+            f"environment_name={utils.get_env_var('ENVIRONMENT_NAME')}",
+            f"default_token={datetime.datetime.now()}"
+        ] 
     )
     promote_model_to_staging.after(evaluate_model)
 
