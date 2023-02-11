@@ -16,7 +16,7 @@ warnings.filterwarnings('ignore')
 )
 def cifar_pipeline():
 
-    default_args = [f"default_token={datetime.datetime.now()}"] if utils.get_env_var('USE_CACHE') == 'n' else []
+    default_args = [f"default_token={datetime.datetime.now()}"] if utils.get_env_var('USE_CACHE') == 'nocache' else []
 
     # Upload Dataset
     upload_dataset = dsl.ContainerOp(
