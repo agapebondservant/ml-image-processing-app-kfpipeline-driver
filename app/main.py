@@ -23,14 +23,14 @@ def cifar_pipeline():
         name='upload_dataset',
         image='oawofolu/ml-image-processor:latest',
         command="python",
-        arguments=default_args + [
+        arguments=[
             "/app/main.py",
             "mlflow_entry=upload_dataset",
             f"mlflow_stage={utils.get_env_var('MLFLOW_STAGE')}",
             f"git_repo={utils.get_env_var('GIT_REPO')}",
             f"experiment_name={utils.get_env_var('EXPERIMENT_NAME')}",
             f"environment_name={utils.get_env_var('ENVIRONMENT_NAME')}"
-        ]
+        ] + default_args
     )
 
     # Train Model
@@ -38,14 +38,14 @@ def cifar_pipeline():
         name='train_model',
         image='oawofolu/ml-image-processor:latest',
         command="python",
-        arguments=default_args + [
+        arguments=[
             "/app/main.py",
             "mlflow_entry=train_model",
             f"mlflow_stage={utils.get_env_var('MLFLOW_STAGE')}",
             f"git_repo={utils.get_env_var('GIT_REPO')}",
             f"experiment_name={utils.get_env_var('EXPERIMENT_NAME')}",
             f"environment_name={utils.get_env_var('ENVIRONMENT_NAME')}"
-        ]
+        ] + default_args
     )
     train_model.after(upload_dataset)
 
@@ -54,14 +54,14 @@ def cifar_pipeline():
         name='evaluate_model',
         image='oawofolu/ml-image-processor:latest',
         command="python",
-        arguments=default_args + [
+        arguments=[
             "/app/main.py",
             "mlflow_entry=evaluate_model",
             f"mlflow_stage={utils.get_env_var('MLFLOW_STAGE')}",
             f"git_repo={utils.get_env_var('GIT_REPO')}",
             f"experiment_name={utils.get_env_var('EXPERIMENT_NAME')}",
             f"environment_name={utils.get_env_var('ENVIRONMENT_NAME')}"
-        ]
+        ] + default_args
     )
     evaluate_model.after(train_model)
 
@@ -70,14 +70,14 @@ def cifar_pipeline():
         name='promote_model_to_staging',
         image='oawofolu/ml-image-processor:latest',
         command="python",
-        arguments=default_args + [
+        arguments=[
             "/app/main.py",
             "mlflow_entry=promote_model_to_staging",
             f"mlflow_stage={utils.get_env_var('MLFLOW_STAGE')}",
             f"git_repo={utils.get_env_var('GIT_REPO')}",
             f"experiment_name={utils.get_env_var('EXPERIMENT_NAME')}",
             f"environment_name={utils.get_env_var('ENVIRONMENT_NAME')}"
-        ]
+        ] + default_args
     )
     promote_model_to_staging.after(evaluate_model)
 
