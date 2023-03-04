@@ -2,7 +2,7 @@ import kfp.dsl as dsl
 from kfp import Client
 import logging
 import warnings
-import utils
+from . import utils
 import datetime
 
 logging.basicConfig()
