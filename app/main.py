@@ -28,6 +28,8 @@ def cifar_pipeline():
             f"git_repo={utils.get_env_var('GIT_REPO')}",
             f"experiment_name={utils.get_env_var('EXPERIMENT_NAME')}",
             f"environment_name={utils.get_env_var('ENVIRONMENT_NAME')}",
+            f"mlflow_s3_uri={utils.get_cmd_arg('mlflow_s3_uri') or utils.get_env_var('MLFLOW_S3_ENDPOINT_URL')}",
+            f"mlflow_tracking_uri={utils.get_cmd_arg('mlflow_tracking_uri') or utils.get_env_var('MLFLOW_TRACKING_URI')}",
             f"default_token={datetime.datetime.now()}"
         ]
     )
@@ -44,6 +46,8 @@ def cifar_pipeline():
             f"git_repo={utils.get_env_var('GIT_REPO')}",
             f"experiment_name={utils.get_env_var('EXPERIMENT_NAME')}",
             f"environment_name={utils.get_env_var('ENVIRONMENT_NAME')}",
+            f"mlflow_s3_uri={utils.get_cmd_arg('mlflow_s3_uri') or utils.get_env_var('MLFLOW_S3_ENDPOINT_URL')}",
+            f"mlflow_tracking_uri={utils.get_cmd_arg('mlflow_tracking_uri') or utils.get_env_var('MLFLOW_TRACKING_URI')}",
             f"default_token={datetime.datetime.now()}"
         ]
     )
@@ -61,6 +65,8 @@ def cifar_pipeline():
             f"git_repo={utils.get_env_var('GIT_REPO')}",
             f"experiment_name={utils.get_env_var('EXPERIMENT_NAME')}",
             f"environment_name={utils.get_env_var('ENVIRONMENT_NAME')}",
+            f"mlflow_s3_uri={utils.get_cmd_arg('mlflow_s3_uri') or utils.get_env_var('MLFLOW_S3_ENDPOINT_URL')}",
+            f"mlflow_tracking_uri={utils.get_cmd_arg('mlflow_tracking_uri') or utils.get_env_var('MLFLOW_TRACKING_URI')}",
             f"default_token={datetime.datetime.now()}"
         ]
     )
@@ -78,6 +84,8 @@ def cifar_pipeline():
             f"git_repo={utils.get_env_var('GIT_REPO')}",
             f"experiment_name={utils.get_env_var('EXPERIMENT_NAME')}",
             f"environment_name={utils.get_env_var('ENVIRONMENT_NAME')}",
+            f"mlflow_s3_uri={utils.get_cmd_arg('mlflow_s3_uri') or utils.get_env_var('MLFLOW_S3_ENDPOINT_URL')}",
+            f"mlflow_tracking_uri={utils.get_cmd_arg('mlflow_tracking_uri') or utils.get_env_var('MLFLOW_TRACKING_URI')}",
             f"default_token={datetime.datetime.now()}"
         ]
     )
