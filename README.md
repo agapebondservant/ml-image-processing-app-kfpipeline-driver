@@ -30,7 +30,7 @@ kp image create imgprocessor-kfp --tag ${DATA_E2E_REGISTRY_USERNAME}/ml-image-pr
         --namespace default \
         --wait \
         --env MLFLOW_TRACKING_URI=http://mlflow.${DATA_E2E_BASE_URL} \
-        --env MLFLOW_S3_ENDPOINT_URL=http://minio-ml.${DATA_E2E_BASE_URL} \
+        --env MLFLOW_S3_ENDPOINT_URL=https://minio-ml.${DATA_E2E_BASE_URL} \
         --git “https://github.com/agapebondservant/ml-image-processing-app-kfpipeline-driver.git” \
         --git-revision "main"
 ```
